@@ -2,37 +2,14 @@
 ![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)
 # Deep Object Pose Estimation - ROS Inference
 
-This is the official DOPE ROS package for detection and 6-DoF pose estimation of **known objects** from an RGB camera.  The network has been trained on the following YCB objects:  cracker box, sugar box, tomato soup can, mustard bottle, potted meat can, and gelatin box.  For more details, see our [CoRL 2018 paper](https://arxiv.org/abs/1809.10790) and [video](https://youtu.be/yVGViBqWtBI).
-
-*Note:*  The instructions below refer to inference only.  Training code is also provided but not supported. Thank you to [@Blaine141](https://github.com/blaine141) You can check out how to train DOPE on a single [GPU and using NVISII](https://github.com/NVlabs/Deep_Object_Pose/issues/155#issuecomment-791148200).
+This project is modify on the official DOPE ROS package for detection and 6-DoF pose estimation of **known objects** from an RGB camera.  The network has been trained on the following YCB objects:  cracker box, sugar box, tomato soup can, mustard bottle, potted meat can, and gelatin box.  For more details, see the paper [CoRL 2018 paper](https://arxiv.org/abs/1809.10790) and [video](https://youtu.be/yVGViBqWtBI).
 
 ![DOPE Objects](dope_objects.png)
 
-## Updates
-
-2022/07/13 - Added a script with a simple example for computing the ADD and ADD-S metric on data. Please refer to [script/metrics/](https://github.com/NVlabs/Deep_Object_Pose/tree/master/scripts/metrics). 
-
-2022/03/30 - Update on the NViSII script to handle [symmetrical objects](https://github.com/NVlabs/Deep_Object_Pose/tree/master/scripts/nvisii_data_gen#handling-objects-with-symmetries).  Also the NViSII script is compatible with the original training script. Thanks to Martin Günther. 
-
-2021/12/13 - Added a NViSII script to generate synthetic data for training DOPE. See this [readme](https://github.com/NVlabs/Deep_Object_Pose/tree/master/scripts/nvisii_data_gen) for more details. We also added the update training and inference (without ROS) scripts for the NViSII paper [here](https://github.com/NVlabs/Deep_Object_Pose/tree/master/scripts/train2). 
-
-2021/10/20 - Added ROS2 Foxy inference support through [Isaac ROS DOPE package](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_pose_estimation) for Jetson and x86+CUDA-capable GPU.
-
-2021/08/07 - Added publishing belief maps. Thank you to Martin Günther. 
-
-2020/03/09 - Added HOPE [weights to google drive](https://drive.google.com/open?id=1DfoA3m_Bm0fW8tOWXGVxi4ETlLEAgmcg), [the 3d models](https://drive.google.com/drive/folders/1jiJS9KgcYAkfb8KJPp5MRlB0P11BStft), and the objects dimensions to config. [Tremblay et al., IROS 2020](https://arxiv.org/abs/2008.11822).  The HOPE dataset can be found [here](https://github.com/swtyree/hope-dataset/) and is also part of the [BOP challenge](https://bop.felk.cvut.cz/datasets/#HOPE)
-
-<!-- 2020/02/09 - Upgraded DOPE to use Python 3. Updated Dockerfile to use Python3-compatible ROS Noetic. The Python 2.7/ROS Kinetic is still available on the ['ros-kinetic' branch](https://github.com/NVlabs/Deep_Object_Pose/tree/ros-kinetic). -->
-
-<!-- 2020/16/03 - Added a wiki (thanks to [@saratrajput](https://github.com/saratrajput))  -->
-
-<!-- 2019/03/07 - ROS interface update (thanks to Martin Günther) -->
-
-<!-- 2019/11/06 - Added bleach YCB weights  -->
 
 ## Installing
 
-We have tested on Ubuntu 20.04 with ROS Noetic with an NVIDIA Titan X and RTX 2080ti with Python 3.8. The code may work on other systems.
+We have tested on Ubuntu 20.04 with ROS Noetic with Python 3.8. The code may work on other systems.
 
 ---
 ***NOTE***
@@ -59,7 +36,7 @@ The following steps describe the native installation. Alternatively, use the pro
 3. **Download the DOPE code**
     ```
     $ cd ~/catkin_ws/src
-    $ git clone https://github.com/NVlabs/Deep_Object_Pose.git dope
+    $ git clone <this repo>
     ```
 
 4. **Install python dependencies**
@@ -96,11 +73,7 @@ The following steps describe the native installation. Alternatively, use the pro
 2. **Start camera node** (or start your own camera node)
     ```
     $ roslaunch dope camera.launch  # Publishes RGB images to `/dope/webcam_rgb_raw`
-    ```
-
-    The camera must publish a correct `camera_info` topic to enable DOPE to compute the correct poses. Basically all ROS drivers have a `camera_info_url` parameter where you can set the calibration info (but most ROS drivers include a reasonable default).
-
-    For details on calibration and rectification of your camera see the [camera tutorial](doc/camera_tutorial.md).
+    ```.
 
 3. **Edit config info** (if desired) in `~/catkin_ws/src/dope/config/config_pose.yaml`
     * `topic_camera`: RGB topic to listen to
@@ -155,20 +128,6 @@ The following steps describe the native installation. Alternatively, use the pro
 
 DOPE returns the poses of the objects in the camera coordinate frame.  DOPE uses the aligned YCB models, which can be obtained using [NVDU](https://github.com/NVIDIA/Dataset_Utilities) (see the `nvdu_ycb` command).
 
-## HOPE 3D Models
-
-![HOPE 3D models rendered in UE4](https://i.imgur.com/V6wX64p.png)
-
-We introduce new toy 3d models that you download [here](https://drive.google.com/drive/folders/1jiJS9KgcYAkfb8KJPp5MRlB0P11BStft). 
-The folders are arranged like the YCB 3d models organization. 
-You can buy the real objects using the following links 
-[set 1](https://www.amazon.com/gp/product/B071ZMT9S2), 
-[set 2](https://www.amazon.com/gp/product/B007EA6PKS), 
-[set 3](https://www.amazon.com/gp/product/B00H4SKSPS), 
-and 
-[set 4](https://www.amazon.com/gp/product/B072M2PGX9). 
-
-The HOPE dataset can be found [here](https://github.com/swtyree/hope-dataset/) and is also part of the [BOP challenge](https://bop.felk.cvut.cz/datasets/#HOPE).
 
 ## How to cite DOPE 
 
@@ -187,12 +146,3 @@ If you use this tool in a research project, please cite as follows:
 
 Copyright (C) 2018 NVIDIA Corporation. All rights reserved. Licensed under the [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 
-
-## Acknowledgment
-
-Thanks to Jeffrey Smith (jeffreys@nvidia.com) for creating the Docker image.
-
-
-## Contact
-
-Jonathan Tremblay (jtremblay@nvidia.com), Stan Birchfield (sbirchfield@nvidia.com)

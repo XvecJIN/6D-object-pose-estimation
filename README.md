@@ -2,10 +2,7 @@
 ![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)
 # Deep Object Pose Estimation - ROS Inference
 
-This project is modify on the official DOPE ROS package for detection and 6-DoF pose estimation of **known objects** from an RGB camera.  The network has been trained on the following YCB objects:  cracker box, sugar box, tomato soup can, mustard bottle, potted meat can, and gelatin box.  For more details, see the paper [CoRL 2018 paper](https://arxiv.org/abs/1809.10790) and [video](https://youtu.be/yVGViBqWtBI).
-
-![DOPE Objects](dope_objects.png)
-
+This project is modify on the official DOPE ROS package for detection and 6-DoF pose estimation of **known objects** from an RGB camera.  The network has been trained on the following YCB objects:  cracker box, sugar box, tomato soup can, mustard bottle, potted meat can, and gelatin box.  
 
 ## Installing
 

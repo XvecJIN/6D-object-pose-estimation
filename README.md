@@ -67,7 +67,7 @@ The following steps describe the native installation. Alternatively, use the pro
     $ roscore
     ```
 
-2. **Start camera node** (or start your own camera node)
+2. **Start camera node** (or use our robot camera node)
     ```
     $ roslaunch dope camera.launch  # Publishes RGB images to `/dope/webcam_rgb_raw`
     ```.
@@ -125,19 +125,6 @@ The following steps describe the native installation. Alternatively, use the pro
 
 DOPE returns the poses of the objects in the camera coordinate frame.  DOPE uses the aligned YCB models, which can be obtained using [NVDU](https://github.com/NVIDIA/Dataset_Utilities) (see the `nvdu_ycb` command).
 
-
-## How to cite DOPE 
-
-If you use this tool in a research project, please cite as follows:
-```
-@inproceedings{tremblay2018corl:dope,
- author = {Jonathan Tremblay and Thang To and Balakumar Sundaralingam and Yu Xiang and Dieter Fox and Stan Birchfield},
- title = {Deep Object Pose Estimation for Semantic Robotic Grasping of Household Objects},
- booktitle = {Conference on Robot Learning (CoRL)},
- url = "https://arxiv.org/abs/1809.10790",
- year = 2018
-}
-```
 
 ## License
 
